@@ -1,5 +1,99 @@
 .button{
-    background-color: red;
+    background-color: rgb(0, 187, 255);
     width: 30px;
     height: 10px;
 }
+.chart{
+    width: 400px;
+    height: 100px;
+}
+body {font-family: Arial;}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+
+/* :root {
+    --color_0: 255,255,255;
+    --color_1: 0,0,0;
+    --color_2: 156,108,84;
+    --color_3: 22,22,22;
+    --color_4: 248,246,243;
+    --color_5: 196,164,60;
+    --color_6: 255,255,255;
+    --color_7: 191,191,191;
+    --color_8: 128,128,128;
+    --color_9: 64,64,64;
+    --color_10: 0,0,0;
+    --color_11: 255,255,255;
+    --color_12: 191,191,191;
+    --color_13: 128,128,128;
+    --color_14: 64,64,64;
+    --color_15: 0,0,0;
+    --color_16: 224,205,196;
+    --color_17: 192,156,138;
+    --color_18: 156,108,84;
+    --color_19: 104,72,56;
+    --color_20: 52,36,28;
+    --color_21: 208,208,208;
+    --color_22: 162,162,162;
+    --color_23: 115,115,115;
+    --color_24: 69,69,69;
+    --color_25: 22,22,22;
+    --color_26: 252,251,249;
+    --color_27: 248,246,243;
+    --color_28: 203,188,165;
+    --color_29: 155,129,90;
+    --color_30: 78,65,45;
+    --color_31: 226,210,158;
+    --color_32: 196,164,60;
+    --color_33: 147,123,45;
+    --color_34: 98,82,30;
+    --color_35: 49,41,15;
+    --font_0: normal normal normal 22px/1.41em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif;
+    --font_1: normal normal normal 14px/1.79em avenir-lt-w01_35-light1475496,avenir-lt-w05_35-light,sans-serif;
+    --font_2: normal normal normal 28px/1.375em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif;
+    --font_3: normal normal normal 88px/1.2em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif;
+    --font_4: normal normal normal 72px/1.25em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif;
+    --font_5: normal normal normal 50px/1.34em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif;
+    --font_6: normal normal normal 40px/1.35em helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif;
+    --font_7: normal normal normal 20px/1.67em avenir-lt-w01_35-light1475496,avenir-lt-w05_35-light,sans-serif;
+    --font_8: normal normal normal 18px/1.75em avenir-lt-w01_35-light1475496,avenir-lt-w05_35-light,sans-serif;
+    --font_9: normal normal normal 15px/1.875em avenir-lt-w01_35-light1475496,avenir-lt-w05_35-light,sans-serif;
+    --font_10: normal normal normal 14px/1.79em avenir-lt-w01_35-light1475496,avenir-lt-w05_35-light,sans-serif;
+
+} */f

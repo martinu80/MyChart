@@ -4,16 +4,169 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="VuePress 1.8.3">
+    <link rel="icon" href="./images/favicon.ico">
+
     <title>Document</title>
     <link rel="stylesheet" href="./styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script defer src="./main.js"></script>
 </head>
-<body>
-    <button class="button" onclick="generate()"></button>
-    <div style="width: 1000px; height: 700px">
-        <canvas id="myChart"></canvas>
+<body onload="startTime()">
+    <script type=text/javascript src="./function.js"></script>
+    <div>
+<!--     <script>
+         </script> -->
+<!-- ======================================================================= -->
+<!-- DateTime -->
+<h3 id="txt" >%Time%</h3>
+<!-- ======================================================================= -->
+<!-- LOGO -->
+<div id="app" data-server-rendered="true">
+	<a href="http://www.google.com" class="home-link router-link-active"><img src="./images/favicon.ico" alt="Chart.js" class="logo"> <span class="site-name can-hide"></span></a> 
+<!-- <a href="http://www.google.com" class="home-link router-link-active"><img src="./images/LOGO.jpg" class="logo" width="100" height="50"></a> -->
+</div>
+<!-- ======================================================================= -->
+<!-- Chart Name -->
+<h1>Chart Name</h1>
+<!-- ======================================================================= -->
+    </div> 
+
+  
+<!-- ======================================================================= -->
+
+  <!-- Tab links -->
+  <div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'Graph 1'), Group_datapoints('G1')">Graph 1</button>
+    <button class="tablinks" onclick="openTab(event, 'Graph 2'), Group_datapoints('G2')">Graph 2</button>
+    <button class="tablinks" onclick="openTab(event, 'Graph 3'), Group_datapoints('G3')">Graph 3</button>
+  </div>
+
+  <!-- Tab content -->
+  <div id="Graph 1" class="tabcontent" >
+    <h3>Graph 1</h3>
+    <p >Flow</p>
+  </div>
+
+  <div id="Graph 2" class="tabcontent" >
+    <h3>Graph 2</h3>
+    <p>Pressure</p>
+  </div>
+
+  <div id="Graph 3" class="tabcontent" >
+    <h3>Graph 3</h3>
+    <p>Temperature</p>
+  </div>
+
+  <script type=text/javascript src="./function.js"></script>
+
+<!-- ======================================================================= -->
+<!-- Datalist to choose a trend -->
+<p>The optgroup tag is used to group related options in a drop-down list:</p>
+
+<form action="/action_page.php">
+<label for="graphs">Choose graph:</label>
+<select name="graphs" id="graphs" required>
+   <optgroup label="Group_1">
+    <option id="Tag_1" value="Tag_1" onclick="drop_options(value)">Tag_1</option>
+    <option id="Tag_2" value="Tag_2" onclick="drop_options(value)" >Tag_2</option>
+    <option id="Tag_3" value="Tag_5" onclick="drop_options(value)">Tag_5</option>
+  </optgroup>
+  <optgroup label="Group_2">
+    <option value="Tag_3">Tag_3</option>
+    <option value="Tag_4">Tag_4</option>
+  </optgroup>
+</select>
+
+<!-- <script>
+</script> -->
+<script type=text/javascript src="./function.js"></script>
+ 
+<input type="submit" value="Submit">
+<br><br>
+</form>
+  <!-- ======================================================================= -->
+
+ <!-- Buttons	 -->
+  <div class="code-editor" data-v-66ca8197 data-v-365c20ab>
+    <div class="code-editor-header" data-v-66ca8197>
+    <div class="code-editor-tabs" data-v-66ca8197>
+        <button class="code-editor-tab" data-v-66ca8197 onclick="AVG()">
+          AVG
+        </button><button class="code-editor-tab" data-v-66ca8197 onclick="Min()">
+          MIN
+        </button><button class="code-editor-tab" data-v-66ca8197 onclick="Max()">
+          MAX
+        </button></div>
+        <h1 id="Value_1">###</h1>
+       </div> </div>
+<!-- <script>
+</script> -->
+<script type=text/javascript src="./function.js"></script>
+ 
+<!-- ======================================================================= -->
+<!-- DateTime From...To	 -->
+<div>
+    <form>
+    <label for="from-date"> Start date:</label>
+    <input type="date" id="from-date" name="from-date" value="2022-06-06" min="2022-01-01" max="2025-12-01">
+    <label for="from-time"> Start time:</label>
+    <input type="time" id="from-time" name="from-time" step="2" value="15:30:00" min="00:00:00" max="23:59:59">
+    <br>
+    <label for="to-date"> End date: </label>
+    <input type="date" id="to-date" name="to-date" value="2022-06-06" min="2022-01-01" max="2025-12-01">
+    <label for="to-time"> End time: </label>
+    <input type="time" id="to-time" name="to-time" step="2" value="15:30:00" min="00:00:00" max="23:59:59">
+    </form>
+  
+<!-- ==========================================================================-->
+
+    <!-- Filter DateTime From...To	 ...Add...Update... buttons-->
+    <button onclick="filterDate()">Filter</button>
+    <button onclick="resetDate()">Reset</button>
+    <br>
+    <input type="pushValue" id="pushValue" value='111'>
+    <button id="push" onclick="UpdateChart()">Update Data</button>
+    <button id="add" onclick="addData(myChart, 'today', dataFromServer)">Add Data</button>
+    <button id="push" onclick="pushValueChart()">Push Data</button>
+    <button id="push" onclick="updateConfigByMutating(myChart)">Update Name</button>
+    <script type=text/javascript src="./function.js"></script>
+    <br>
+    <br>
+    <!-- ==========================================================================-->
+    <!--Filter dates  From...To	 script -->
     </div>
+    
+    <!-- <script type="module" src="main.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="bootstrap.js"></script>
+      -->
+
+<!-- ======================================================================= -->
+<div id="progressbar">
+</div>
+<script type=text/javascript src="./function.js"></script>
+<!--    <script>
+ </script>-->
+</div>   
+<!-- ======================================================================= -->
+    <!-- Chart	 -->
+
+     <div class="main">
+        <canvas id="myChart" width="400" height="100"></canvas>
+    </div>
+<!-- ======================================================================= -->
+    <footer>
+
+
+        <button type="button" onclick="ConnectToDB()">Connect to DB</button>
+        <button type="button" onclick="UpdateChart()">Update</button>
+        </div>
+  <script type=text/javascript src="./function.js"></script>
+  <button class="button" onclick="generate()"></button>
+
+  </footer>
 </body>
 </html>
