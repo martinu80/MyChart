@@ -13,20 +13,14 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 
-app.listen(3000, () => {
-  console.log("Application started and Listening on port 3000");
+app.listen(5000, () => {
+  console.log("Application started and Listening on port 5000");
 });
 
 app.get("/chart", (req, res) => {
-  
-  // const ctx = document.getElementById('myChart');
-  //   const myChart = new Chart(ctx, config);
-  // console.log(__dirname)
-  // res.sendFile(__dirname + "/index.html");
-
   const data = {
     labels: [
-      'January',
+      'stella',
       'February',
       'March',
       'April',
@@ -48,4 +42,5 @@ app.post("/post-data", (req, res) => {
   // await request to db 
   const status = dataFromClient.min > 10 ? true : false
   res.json({"status":status})
+  console.log(dataFromClient)
 });
