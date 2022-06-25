@@ -2,6 +2,7 @@ main()
 
 async function getChartDataFromServer(){
     const response = await axios.get("http://localhost:5000/chart");
+    console.log(response.data)
     return response.data;
 }
 
@@ -12,6 +13,32 @@ async function generate(){
     });
     response.data.status === true ? alert("success") : alert("fail")
 }
+
+async function sendParametersToServer(){
+    const TagName = document.getElementById("graphs")[document.getElementById("graphs").selectedIndex].text
+    console.log(TagName)
+    const response = await axios.post("http://localhost:5000/post-eric",{
+        "TagName":TagName
+        //"function":20
+    });
+    //response.data.status === true ? alert("success") : alert("fail")
+    alert(response.data.TagName)
+    getChartDataFromServer()
+}
+
+/* async function Min2Server(){
+   /*  const Start_date=new Date(document.getElementById('from-date').value),
+    const Start_time=Start_date.setHours(0,0,0,0),
+    const End_date=new Date(document.getElementById('to-date').value),
+    const End_time=End_date.setHours(0,0,0,0), 
+    const response = await axios.post("http://localhost:5000/post-data",{
+    
+    
+        "TagTimeStamp":TagTimeStamp,
+        "Tag_1":(document.getElementById('Tag_1').value)
+});
+response.data.status === true ? alert("success") : alert("fail")
+} */
 
 // ============================================================================================
 var commonOptions={

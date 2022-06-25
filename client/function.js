@@ -147,24 +147,74 @@ function checkTime(i) {
 
 
 function drop_options(value){
-  Console.log(document.getElementById(value).value);
+  Console.log(document.getElementById(graphs).value);
 }
 
 function Min(){
-  var nums = datapoints;
+  var nums = dataFromServer;
   let arrayList = nums;
   let min = arrayList[0];
   for (let i = 1; i < arrayList.length; ++i) {
     if (arrayList[i] < min) {
       min = arrayList[i];
     }
-  }
-  //console.log(min);
+  } 
 document.getElementById("Value_1").innerHTML = (min);
 }
+//=============================================================================================================
+async function Min2Server(){
+  let TagTimeStamp=new Date(document.getElementById('from-date').value)+" "+document.getElementById('from-time').value
+  let Start_date=new Date(document.getElementById('from-date').value)
+  let Start_time=(document.getElementById('from-time').value)//Start_date.setHours(0,0,0,0)
+  let End_date=new Date(document.getElementById('to-date').value)
+  let End_time=(document.getElementById('to-time').value)//End_date.setHours(0,0,0,0)
 
+  const response = await axios.post("http://localhost:5000/post-data",{
+  "min":125,
+  //"End_time":End_date.setHours(0,0,0,0), //"TagTimeStamp":"2022-05-11T00:19:23.000Z", */
+  "TagTimeStamp":TagTimeStamp,
+  "Start_date":Start_date,
+  "Start_time":Start_time,
+  "End_date":End_date,
+  "End_time":End_time,
+  "From_Date":new Date(document.getElementById('from-date').value),
+  "To_Date":new Date(document.getElementById('to-date').value),
+  "Tag_1":(document.getElementById('Tag_1').value),
+  "Tag_2":(document.getElementById('Tag_2').value),
+  "Tag_3":(document.getElementById('Tag_3').value)
+});
+response.data.status === true //? alert("success") : alert("fail")
+}
+
+
+async function Max2Server(){
+  let TagTimeStamp=new Date(document.getElementById('from-date').value)+" "+document.getElementById('from-time').value
+  let Start_date=new Date(document.getElementById('from-date').value)
+  let Start_time=(document.getElementById('from-time').value)//Start_date.setHours(0,0,0,0)
+  let End_date=new Date(document.getElementById('to-date').value)
+  let End_time=(document.getElementById('to-time').value)//End_date.setHours(0,0,0,0)
+
+  const response = await axios.post("http://localhost:5000/post-data",{
+  "max":125,
+  //"End_time":End_date.setHours(0,0,0,0), //"TagTimeStamp":"2022-05-11T00:19:23.000Z", */
+  "TagTimeStamp":TagTimeStamp,
+  "Start_date":Start_date,
+  "Start_time":Start_time,
+  "End_date":End_date,
+  "End_time":End_time,
+  "From_Date":new Date(document.getElementById('from-date').value),
+  "To_Date":new Date(document.getElementById('to-date').value),
+  "Tag_1":(document.getElementById('Tag_1').value),
+  "Tag_2":(document.getElementById('Tag_2').value),
+  "Tag_3":(document.getElementById('Tag_3').value)
+
+});
+response.data.status === true //? alert("success") : alert("fail")
+}
+
+//=============================================================================================
 function Max(){
-  var nums = datapoints;
+  var nums = dataFromServer;
   let arrayList = nums;
   let max = arrayList[0];
   for (let i = 1; i < arrayList.length; ++i) {
@@ -178,7 +228,7 @@ document.getElementById("Value_1").innerHTML = (max);
 
 function AVG(){
 //   //An array of numbers that we want to get the average of.
- var nums = datapoints;//[0, 150, 30, 20, -8, -200];
+ var nums = dataFromServer;//[0, 150, 30, 20, -8, -200];
 //
 // //Work out the sum of the numbers in our array
 // var totalSum = 0;
@@ -222,7 +272,7 @@ evt.currentTarget.className += " active";
 function Group_datapoints(Group){
     console.log(Group);
 if (Group="G1") {
-  datapoints=[17, 186, 155, 134, 111, 167, 187];//dataFromServer;
+  datapoints=dataFromServer;
   labels=['a1','a2','a3','a4','a5','a6','G1'];  //console.log(Group);
     console.log(data[0]);
     console.log(datapoints);

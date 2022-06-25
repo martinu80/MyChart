@@ -71,19 +71,20 @@
    <optgroup label="Group_1">
     <option id="Tag_1" value="Tag_1" onclick="drop_options(value)">Tag_1</option>
     <option id="Tag_2" value="Tag_2" onclick="drop_options(value)" >Tag_2</option>
-    <option id="Tag_3" value="Tag_5" onclick="drop_options(value)">Tag_5</option>
+    <option id="Tag_3" value="Tag_3" onclick="drop_options(value)">Tag_3</option>
   </optgroup>
   <optgroup label="Group_2">
     <option value="Tag_3">Tag_3</option>
     <option value="Tag_4">Tag_4</option>
   </optgroup>
 </select>
+<!--<input type="submit" value="Submit" onclick="sendParametersToServer()">-->
 
 <!-- <script>
 </script> -->
 <script type=text/javascript src="./function.js"></script>
  
-<input type="submit" value="Submit">
+
 <br><br>
 </form>
   <!-- ======================================================================= -->
@@ -94,7 +95,7 @@
     <div class="code-editor-tabs" data-v-66ca8197>
         <button class="code-editor-tab" data-v-66ca8197 onclick="AVG()">
           AVG
-        </button><button class="code-editor-tab" data-v-66ca8197 onclick="Min()">
+        </button><button class="code-editor-tab" data-v-66ca8197 onclick="Min2Server()">
           MIN
         </button><button class="code-editor-tab" data-v-66ca8197 onclick="Max()">
           MAX
@@ -119,6 +120,8 @@
     <label for="to-time"> End time: </label>
     <input type="time" id="to-time" name="to-time" step="2" value="15:30:00" min="00:00:00" max="23:59:59">
     </form>
+    
+
   
 <!-- ==========================================================================-->
 
@@ -160,7 +163,7 @@
 <!-- ======================================================================= -->
     <footer>
 
-
+        <button onclick="sendParametersToServer()">MySubmit</button>
         <button type="button" onclick="ConnectToDB()">Connect to DB</button>
         <button type="button" onclick="UpdateChart()">Update</button>
         </div>
