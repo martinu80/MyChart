@@ -16,10 +16,19 @@ async function generate(){
 
 async function sendParametersToServer(){
     const TagName = document.getElementById("graphs")[document.getElementById("graphs").selectedIndex].text
+    //const temp=document.getElementById("start_date").value
+    const StartDate = document.getElementById("start_date").value
+    const EndDate = document.getElementById("end_date").value
+    const StartTime = document.getElementById("start_time").value
+    const EndTime = document.getElementById("end_time").value
     console.log(TagName)
     const response = await axios.post("http://localhost:5000/post-eric",{
-        "TagName":TagName
+        "TagName":TagName,
         //"function":20
+        "StartDate" : StartDate,
+        "EndDate" : EndDate,
+        "StartTime" : StartTime,
+        "EndTime" : EndTime        
     });
     //response.data.status === true ? alert("success") : alert("fail")
     alert(response.data.TagName)

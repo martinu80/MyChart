@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
       else console.log("connected!!!!")
       // create Request object
       var request = new sql.Request();
-      var query='select Tag_1 from DATA_table';
+      var query='select TagTimeStamp,Tag_1 from DATA_table';
 /*       value1=dataFromClient.Start_date & dataFromClient.Start_time;
       console.log(value1);
       value2=dataFromClient.End_date & dataFromClient.End_time;
@@ -118,7 +118,7 @@ app.post("/post-eric", (req, res) => {
   const dataFromClient = req.body;
   // await request to db 
   const TagName = dataFromClient.TagName
-
+  console.log(dataFromClient)
 
   //====================================
   // connect to your database
@@ -136,9 +136,9 @@ app.post("/post-eric", (req, res) => {
           // console.log("query result", recordset)
           // send records as a response
           var jsonObj = JSON.parse(JSON.stringify(recordset));
-          console.log(data.datasets[0].label);
+          
           data.datasets[0].label=TagName
-          console.log(data.datasets[0].label);
+          
           if(TagName=="Tag_1"){
             data.datasets[0].data[0]=jsonObj.recordset[0].Tag_1
           }
@@ -159,6 +159,6 @@ app.post("/post-eric", (req, res) => {
 
 
   res.json({"TagName":"The " + TagName + " was sent"})
-  console.log("The " + TagName + " was sent")
+  //console.log("The " + TagName + " was sent")
 });
 
