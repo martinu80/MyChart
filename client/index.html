@@ -88,13 +88,13 @@
   <table class="browserref notranslate">
     <tbody>
       <tr>
-        <td style="width:30%; font-size:16px; text-align:left;">
+        <td style="width:25%; font-size:16px; text-align:left;">
         <!-- Datalist to choose a Function -->
         <p>Please choose a function in a drop-down list:</p>
 
         <form action="/action_page.php">
-        <label for="graphs">Choose graph:</label>
-        <select name="graphs" id="graphs" required>
+        <label for="functions">Choose graph:</label>
+        <select name="functions" id="functions" required>
            <optgroup label="Group_1">
             <option id="Avg" value="Avg" onclick="AVG2Server()">AVG</option>
             <option id="Max" value="Max" onclick="Max2Server()" >MAX</option>
@@ -110,12 +110,12 @@
         </form>
         </td>
 
-        <td style="width:30%; font-size:16px; text-align:left;">
+        <td style="width:45%; font-size:16px; text-align:left;">
                   <!-- Datalist to choose a trend -->
 <p>Please choose a Tag in a drop-down list:</p>
 
 <form action="/action_page.php">
-<label for="graphs">Choose graph:</label>
+<label for="graphs">Choose graph 1:</label>
 <select name="graphs" id="graphs" required>
    <optgroup label="Group_1">
     <option id="Max" value="Tag_1" onclick="drop_options(value)">Tag_1</option>
@@ -127,12 +127,36 @@
     <option value="Tag_4">Tag_4</option>
   </optgroup>
 </select>
+<label for="graphs">Choose graph 2:</label>
+<select name="graphs" id="graphs" required>
+   <optgroup label="Group_1">
+    <option id="Max" value="Tag_1" onclick="drop_options(value)">Tag_1</option>
+    <option id="Tag_2" value="Tag_2" onclick="drop_options(value)" >Tag_2</option>
+    <option id="Tag_3" value="Tag_3" onclick="drop_options(value)">Tag_3</option>
+  </optgroup>
+  <optgroup label="Group_2">
+    <option value="Tag_3">Tag_3</option>
+    <option value="Tag_4">Tag_4</option>
+  </optgroup>
+</select>
+<label for="graphs">Choose graph 3:</label>
+<select name="graphs" id="graphs" required>
+   <optgroup label="Group_1">
+    <option id="Max" value="Tag_1" onclick="drop_options(value)">Tag_1</option>
+    <option id="Tag_2" value="Tag_2" onclick="drop_options(value)" >Tag_2</option>
+    <option id="Tag_3" value="Tag_3" onclick="drop_options(value)">Tag_3</option>
+  </optgroup>
+  <optgroup label="Group_2">
+    <option value="Tag_3">Tag_3</option>
+    <option value="Tag_4">Tag_4</option>
+  </optgroup>
+</select>
+
 <!--<input type="submit" value="Submit" onclick="sendParametersToServer()">-->
 
 <!-- <script>
 </script> -->
 <script type=text/javascript src="./function.js"></script>
-
 </form>
         </td>
  

@@ -195,7 +195,7 @@ async function Max2Server(){
   let End_time=(document.getElementById('to-time').value)//End_date.setHours(0,0,0,0)
 
   const response = await axios.post("http://localhost:5000/post-data",{
-  "max":125,
+  "max":225,
   //"End_time":End_date.setHours(0,0,0,0), //"TagTimeStamp":"2022-05-11T00:19:23.000Z", */
   "TagTimeStamp":TagTimeStamp,
   "Start_date":Start_date,

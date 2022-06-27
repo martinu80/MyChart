@@ -12,6 +12,7 @@ async function generate(){
         "max":20
     });
     response.data.status === true ? alert("success") : alert("fail")
+    chart.update();
 }
 
 async function sendParametersToServer(){
