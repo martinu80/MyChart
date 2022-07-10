@@ -98,8 +98,8 @@ function updateScales(chart) {
 
 function UpdateChart() {
 const pushValue=(document.getElementById('pushValue'));
-myChart.data.datasets[0].data[7] = pushValue.value;
-console.log(myChart.data.datasets[0].data[7]);
+myChart.data.datasets[0].data[70] = pushValue.value;
+console.log(myChart.data.datasets[0].data[70]);
 myChart.update()
 }
 
@@ -226,7 +226,7 @@ function Max(){
 document.getElementById("Value_1").innerHTML = (max);
 }
 
-function AVG(){
+function AVG2Server(){
 //   //An array of numbers that we want to get the average of.
  var nums = dataFromServer;//[0, 150, 30, 20, -8, -200];
 //

@@ -4,7 +4,7 @@ const sql = require('mssql/msnodesqlv8');
 //import {config} from './sql_config.js';
 const { config } = require('./sql_config.js') 
 
-var data = {
+const data = {
   labels: [
     //jsonObj.recordset[i].TagTimeStamp,
     'Junuary',
@@ -18,7 +18,7 @@ var data = {
     label: 'My First dataset',
     //backgroundColor: 'rgb(255, 99, 132)',
     //borderColor: 'rgb(255, 99, 132)',
-    data: [0, 40, 5, 2, 20, 30, 45],
+    data: [5,5,5,5,5,5,5],
   }]
 };
 
@@ -68,7 +68,7 @@ app.get('/', (req, res) => {
           // console.log("query result", recordset)
           // send records as a response
           var jsonObj = JSON.parse(JSON.stringify(recordset));
-           console.log(jsonObj.recordset[2].TagTimeStamp);
+           //console.log(jsonObj.recordset[2].TagTimeStamp);
            //console.log(recordset);
            // res.send(recordset);
            res.json(jsonObj)
@@ -103,6 +103,7 @@ app.get("/chart", (req, res) => {
       data: [0, 40, 5, 2, 20, 30, 45],
     }]
   }; */
+  //console.log(data)
   res.json(data)
 });
 
@@ -125,7 +126,7 @@ app.post("/post-eric", (req, res) => {
   sql.connect(config, function (err) {
     
       if (err) console.log(err);
-      else console.log("connected!!!!")
+      else //console.log("connected!!!!")
       // create Request object
       var request = new sql.Request();
       var query='select TagTimeStamp, ' + TagName + ' from DATA_table';
@@ -138,16 +139,19 @@ app.post("/post-eric", (req, res) => {
           var jsonObj = JSON.parse(JSON.stringify(recordset));
           
           data.datasets[0].label=TagName
-          
-          if(TagName=="Tag_1"){
-            data.datasets[0].data[0]=jsonObj.recordset[0].Tag_1
-          }
-          if(TagName=="Tag_2"){
-            data.datasets[0].data[0]=jsonObj.recordset[0].Tag_2
-          }
-          if(TagName=="Tag_3"){
-            data.datasets[0].data[0]=jsonObj.recordset[0].Tag_3
-          }
+          //console.log(jsonObj.recordsets.length)
+          for(i=0;i<7;i++){
+            if(TagName=="Tag_1"){
+              data.datasets[0].data[i]=jsonObj.recordset[i].Tag_1
+            //console.log(data.datasets[0].data[i])
+            }
+            if(TagName=="Tag_2"){
+              data.datasets[0].data[i]=jsonObj.recordset[i].Tag_2
+            }
+            if(TagName=="Tag_3"){
+              data.datasets[0].data[i]=jsonObj.recordset[i].Tag_3
+            }
+        }
           // console.log(jsonObj.recordset[2].TagTimeStamp);
            //console.log(jsonObj);
            //res.json(jsonObj)
@@ -158,7 +162,10 @@ app.post("/post-eric", (req, res) => {
   //====================================
 
 
-  res.json({"TagName":"The " + TagName + " was sent"})
-  //console.log("The " + TagName + " was sent")
+  //res.json({"data":data.datasets[0].data})
+  setTimeout(function(){
+    res.json({"data":data.datasets[0].data})
+}, 1000);
+  //console.log(data.datasets[0].data)
 });
 
