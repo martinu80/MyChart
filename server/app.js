@@ -13,6 +13,7 @@ const data = {
     'April',
     'May',
     'June',
+    'July'
   ],
   datasets: [{
     label: 'My First dataset',
@@ -26,6 +27,7 @@ var app = express();
 app.use(cors())
 const bodyParser = require('body-parser');
 const Chart = require('chart.js');
+const { Char } = require('mssql/msnodesqlv8');
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -53,6 +55,9 @@ app.get('/', (req, res) => {
       // create Request object
       var request = new sql.Request();
       var query='select TagTimeStamp,Tag_1 from DATA_table';
+      value1="select TagTimeStamp, Tag_1 from DATA_table where TagTimeStamp BETWEEN '2022-07-20 00:30:23.000' and '2022-07-22 04:30:23.000'";
+      value2="";
+      //var query=value1;
 /*       value1=dataFromClient.Start_date & dataFromClient.Start_time;
       console.log(value1);
       value2=dataFromClient.End_date & dataFromClient.End_time;
@@ -103,7 +108,7 @@ app.get("/chart", (req, res) => {
       data: [0, 40, 5, 2, 20, 30, 45],
     }]
   }; */
-  //console.log(data)
+  
   res.json(data)
 });
 
@@ -119,18 +124,31 @@ app.post("/post-eric", (req, res) => {
   const dataFromClient = req.body;
   // await request to db 
   const TagName = dataFromClient.TagName
+  const StartDate = dataFromClient.StartDate
+  const StartTime = dataFromClient.StartTime
+  const EndDate = dataFromClient.EndDate
+  const EndTime = dataFromClient.EndTime
+  const TagTimeStampStart =  StartDate + ' ' + StartTime
+  const TagTimeStampEnd =  EndDate + ' ' + EndTime
   console.log(dataFromClient)
-
+  console.log(StartDate)
+  console.log(StartTime)
+  console.log(EndDate)
+  console.log(EndTime)
+  console.log(TagTimeStampStart)
+  console.log(TagTimeStampEnd)
   //====================================
   // connect to your database
   sql.connect(config, function (err) {
     
       if (err) console.log(err);
-      else //console.log("connected!!!!")
+      else console.log("connected!!!!")
       // create Request object
       var request = new sql.Request();
-      var query='select TagTimeStamp, ' + TagName + ' from DATA_table';
-
+      var query='select TagTimeStamp, ' + TagName + ' from DATA_table WHERE TagTimeStamp BETWEEN ' +  '\''  +  TagTimeStampStart +  '\'' + ' and ' + '\'' + TagTimeStampEnd +  '\'';
+      //var query='select TagTimeStamp, ' + TagName + ' from DATA_table where TagTimeStamp = ' + '\'' + StartDate + ' ' + StartTime  + '\'';
+//select TagTimeStamp from DATA_table where TagTimeStamp BETWEEN '2022-07-20 00:30:23.000' and '2022-07-20 04:30:23.000'
+console.log(query);
         request.query(query, function (err, recordset) {
 
           if (err) console.log(err)
@@ -139,8 +157,10 @@ app.post("/post-eric", (req, res) => {
           var jsonObj = JSON.parse(JSON.stringify(recordset));
           
           data.datasets[0].label=TagName
-          //console.log(jsonObj.recordsets.length)
-          for(i=0;i<7;i++){
+          console.log(jsonObj.recordsets.length)
+          //if(){}
+          for(i=0;i<100;i++){
+            data.labels[i]=jsonObj.recordset[i].TagTimeStamp
             if(TagName=="Tag_1"){
               data.datasets[0].data[i]=jsonObj.recordset[i].Tag_1
             //console.log(data.datasets[0].data[i])
@@ -152,6 +172,7 @@ app.post("/post-eric", (req, res) => {
               data.datasets[0].data[i]=jsonObj.recordset[i].Tag_3
             }
         }
+        
           // console.log(jsonObj.recordset[2].TagTimeStamp);
            //console.log(jsonObj);
            //res.json(jsonObj)

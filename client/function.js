@@ -12,10 +12,10 @@ const pushValue = document.getElementById('pushValue');
 // Filter dates  From...To	 script
 
 function filterDate(){
-const Start_date=new Date(document.getElementById('from-date').value);
+const Start_date=new Date(document.getElementById('start_date').value);
 console.log(Start_date);
 const Start_time=Start_date.setHours(0,0,0,0);
-const End_date=new Date(document.getElementById('to-date').value);
+const End_date=new Date(document.getElementById('start_date').value);
 console.log(End_date);
 const End_time=End_date.setHours(0,0,0,0);
 
@@ -29,20 +29,20 @@ console.log(endArray);
 myChart.update();
 };
 
-function addData(chart, label, data) {
-    chart.data.labels.push(label);
-    chart.data.datasets.forEach((dataset) => {
+function addData(myChart, label, data) {
+  myChart.data.labels.push(label);
+  myChart.data.datasets.forEach((dataset) => {
         dataset.data.push(data);
     });
-    chart.update();
+    myChart.update();
 }
 
 function removeData(chart) {
-    chart.data.labels.pop();
-    chart.data.datasets.forEach((dataset) => {
+  myChart.data.labels.pop();
+  myChart.data.datasets.forEach((dataset) => {
         dataset.data.pop();
     });
-    chart.update();
+    myChart.update();
 }
 
 function updateConfigByMutating(chart) {
@@ -163,11 +163,11 @@ document.getElementById("Value_1").innerHTML = (min);
 }
 //=============================================================================================================
 async function Min2Server(){
-  let TagTimeStamp=new Date(document.getElementById('from-date').value)+" "+document.getElementById('from-time').value
-  let Start_date=new Date(document.getElementById('from-date').value)
-  let Start_time=(document.getElementById('from-time').value)//Start_date.setHours(0,0,0,0)
-  let End_date=new Date(document.getElementById('to-date').value)
-  let End_time=(document.getElementById('to-time').value)//End_date.setHours(0,0,0,0)
+  let TagTimeStamp=new Date(document.getElementById('start_date').value)+" "+document.getElementById('from-time').value
+  let Start_date=new Date(document.getElementById('start_date').value)
+  let Start_time=(document.getElementById('start_time').value)//Start_date.setHours(0,0,0,0)
+  let End_date=new Date(document.getElementById('end_date').value)
+  let End_time=(document.getElementById('end_time').value)//End_date.setHours(0,0,0,0)
 
   const response = await axios.post("http://localhost:5000/post-data",{
   "min":125,
@@ -265,6 +265,8 @@ for (i = 0; i < tablinks.length; i++) {
   tablinks[i].className = tablinks[i].className.replace(" active", "");
 }
 document.getElementById(TabName).style.display = "block";
+document.getElementById(TabName).text = TabName;
+
 evt.currentTarget.className += " active";
 }
 
