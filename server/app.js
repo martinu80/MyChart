@@ -17,8 +17,14 @@ const data = {
   ],
   datasets: [{
     label: 'My First dataset',
-    //backgroundColor: 'rgb(255, 99, 132)',
-    //borderColor: 'rgb(255, 99, 132)',
+    data: [5,5,5,5,5,5,5],
+  },
+  {
+    label: 'My Second dataset',
+    data: [5,5,5,5,5,5,5],
+  },
+  {
+    label: 'My Third dataset',
     data: [5,5,5,5,5,5,5],
   }]
 };
@@ -54,19 +60,16 @@ app.get('/', (req, res) => {
       else console.log("connected!!!!")
       // create Request object
       var request = new sql.Request();
-      var query='select TagTimeStamp,Tag_1 from DATA_table';
+      //var query='select TagTimeStamp,Tag_1 AS ERIC,Tag_2 AS VASIA from DATA_table';
       value1="select TagTimeStamp, Tag_1 from DATA_table where TagTimeStamp BETWEEN '2022-07-20 00:30:23.000' and '2022-07-22 04:30:23.000'";
-      value2="";
-      //var query=value1;
-/*       value1=dataFromClient.Start_date & dataFromClient.Start_time;
-      console.log(value1);
-      value2=dataFromClient.End_date & dataFromClient.End_time;
-      console.log(value2); */
-      //var query= 'DATA_table WHERE TagTimeStamp BETWEEN' & value1 & 'AND' & value2 & '"';
-      //var query= 'SELECT * FROM [TEST_db].[dbo].[DATA_table] WHERE [TagTimeStamp] BETWEEN value1 AND value2'
-      // query to the database and get the records
-      //request.query('select TOP (2) TagTimeStamp from DATA_table', function (err, recordset) {
-      //  request.query('select TOP (5)  Tag_1,Tag_2,Tag_3 from TEST_table', function (err, recordset) {
+      value2="select TagTimeStamp, Tag_3 AS Tag_1,Tag_2 AS Tag_2,Tag_1 AS Tag_3 from DATA_table WHERE TagTimeStamp BETWEEN '2022-03-16 10:00:00' and '2022-06-25 10:00:00'";
+      value3="select count(*) as COUNT_ROWS from DATA_table WHERE TagTimeStamp BETWEEN '2022-07-23 00:00:23.000' and '2022-07-23 04:30:23.000'";
+      WhereCondition="WHERE TagTimeStamp BETWEEN '2022-07-23 00:00:23.000' and '2022-07-23 04:30:23.000'"
+      value4="SELECT (SELECT COUNT(*) from DATA_table  " + WhereCondition + ") AS COUNT_ROWS,TagTimeStamp, Tag_3 AS Tag_1,Tag_2 AS Tag_2,Tag_1 AS Tag_3 FROM DATA_table " +  WhereCondition ;
+      
+      
+      var query=value4;
+      console.log(query)
         request.query(query, function (err, recordset) {
 
           if (err) console.log(err)
@@ -74,7 +77,7 @@ app.get('/', (req, res) => {
           // send records as a response
           var jsonObj = JSON.parse(JSON.stringify(recordset));
            //console.log(jsonObj.recordset[2].TagTimeStamp);
-           //console.log(recordset);
+           console.log(recordset.recordset[0].COUNT_ROWS);
            // res.send(recordset);
            res.json(jsonObj)
            // res.send(jsonObj.recordset[2].TagTimeStamp);
@@ -82,13 +85,7 @@ app.get('/', (req, res) => {
         });
       });
   });
-//});
-/* let arrayList = jsonObj.recordset[i].TagTimeStamp;
-for (let i = 1; i < arrayList.length; ++i) {
-  if (arrayList[i] > max) {
-    max = arrayList[i];
-  }
-} */
+
 //--------------------------------------------------
 app.get("/chart", (req, res) => { 
 /*   const data = {
@@ -123,20 +120,29 @@ app.post("/post-data", (req, res) => {
 app.post("/post-eric", (req, res) => {
   const dataFromClient = req.body;
   // await request to db 
-  const TagName = dataFromClient.TagName
+  const TagName1 = dataFromClient.TagName1
+  const TagName2 = dataFromClient.TagName2
+  const TagName3 = dataFromClient.TagName3
+  const TagNames = buildTagNames(TagName1,TagName2,TagName3)
   const StartDate = dataFromClient.StartDate
   const StartTime = dataFromClient.StartTime
   const EndDate = dataFromClient.EndDate
   const EndTime = dataFromClient.EndTime
   const TagTimeStampStart =  StartDate + ' ' + StartTime
   const TagTimeStampEnd =  EndDate + ' ' + EndTime
-  console.log(dataFromClient)
-  console.log(StartDate)
+  const WhereCondition='WHERE TagTimeStamp BETWEEN ' +  '\''  +  TagTimeStampStart +  '\'' + ' and ' + '\'' + TagTimeStampEnd +  '\''
+/*   console.log(TagName1)
+  console.log(TagName2)
+  console.log(TagName3)*/
+  console.log(TagNames)
+/*  console.log(StartDate)
   console.log(StartTime)
   console.log(EndDate)
   console.log(EndTime)
   console.log(TagTimeStampStart)
-  console.log(TagTimeStampEnd)
+  console.log(TagTimeStampEnd) */
+ 
+ 
   //====================================
   // connect to your database
   sql.connect(config, function (err) {
@@ -145,48 +151,61 @@ app.post("/post-eric", (req, res) => {
       else console.log("connected!!!!")
       // create Request object
       var request = new sql.Request();
-      var query='select TagTimeStamp, ' + TagName + ' from DATA_table WHERE TagTimeStamp BETWEEN ' +  '\''  +  TagTimeStampStart +  '\'' + ' and ' + '\'' + TagTimeStampEnd +  '\'';
-      //var query='select TagTimeStamp, ' + TagName + ' from DATA_table where TagTimeStamp = ' + '\'' + StartDate + ' ' + StartTime  + '\'';
-//select TagTimeStamp from DATA_table where TagTimeStamp BETWEEN '2022-07-20 00:30:23.000' and '2022-07-20 04:30:23.000'
-console.log(query);
-        request.query(query, function (err, recordset) {
+      let countRows = -1
+      
+      query= 'SELECT(SELECT COUNT(*) from DATA_table ' + WhereCondition + ') AS COUNT_ROWS , TagTimeStamp, ' + TagNames + ' from DATA_table ' + WhereCondition ;
+      console.log(query);      
+      request.query(query, function (err, recordset) {
 
-          if (err) console.log(err)
-          // console.log("query result", recordset)
-          // send records as a response
-          var jsonObj = JSON.parse(JSON.stringify(recordset));
-          
-          data.datasets[0].label=TagName
-          console.log(jsonObj.recordsets.length)
-          //if(){}
-          for(i=0;i<100;i++){
-            data.labels[i]=jsonObj.recordset[i].TagTimeStamp
-            if(TagName=="Tag_1"){
-              data.datasets[0].data[i]=jsonObj.recordset[i].Tag_1
-            //console.log(data.datasets[0].data[i])
-            }
-            if(TagName=="Tag_2"){
-              data.datasets[0].data[i]=jsonObj.recordset[i].Tag_2
-            }
-            if(TagName=="Tag_3"){
-              data.datasets[0].data[i]=jsonObj.recordset[i].Tag_3
-            }
-        }
+        if (err) console.log(err)
+
+        // send records as a response
+        var jsonObj = JSON.parse(JSON.stringify(recordset));
         
-          // console.log(jsonObj.recordset[2].TagTimeStamp);
-           //console.log(jsonObj);
-           //res.json(jsonObj)
+        countRows = recordset.recordset[0].COUNT_ROWS
+        console.log(countRows)
+        //if(){}
+        for(i=0;i<200;i++){
+          data.labels[i]=jsonObj.recordset[i].TagTimeStamp
+          if(TagName1 != "---"){
+            data.datasets[0].data[i]=jsonObj.recordset[i].Tag_1
+          //console.log(data.datasets[0].data[i])
+          }
+          if(TagName2 != "---"){
+            data.datasets[1].data[i]=jsonObj.recordset[i].Tag_2
+          }
+          if(TagName3 != "---"){
+            data.datasets[2].data[i]=jsonObj.recordset[i].Tag_3
+          }
+      }
+       
+        // console.log(jsonObj.recordset[2].TagTimeStamp);
+         //console.log(jsonObj);
+         //res.json(jsonObj)
 
-        });
       });
+      });
+    
   
-  //====================================
-
-
   //res.json({"data":data.datasets[0].data})
   setTimeout(function(){
-    res.json({"data":data.datasets[0].data})
+    res.json({"data":data.datasets})
 }, 1000);
   //console.log(data.datasets[0].data)
 });
 
+//=====================================================================================
+
+function buildTagNames(){
+  let TagNames = ""
+  for (let i = 0; i < arguments.length; i++) {
+    if(arguments[i] != "---"){
+      if(TagNames==""){
+        TagNames = arguments[i] + " AS Tag_" + (i+1)
+      }else{
+        TagNames = TagNames + "," + arguments[i] + " AS Tag_" + (i+1)
+      }
+    }
+  }
+  return TagNames
+}

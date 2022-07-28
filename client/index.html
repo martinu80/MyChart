@@ -119,8 +119,8 @@
 <p>Please choose a Tag in a drop-down list:</p>
 
 <form action="/action_page.php">
-<label for="graphs">Choose graph 1:</label>
-<select name="graphs" id="graphs" required>
+<label for="graphs1">Choose graph 1:</label>
+<select name="graphs1" id="graphs1" required>
    <optgroup label="Temperature">
     <option id="Tag_0" value="Tag_0" >---</option>
     <option id="Tag_1" value="Tag_1" onclick="drop_options(value)">Tag_1</option>
@@ -138,8 +138,8 @@
   </optgroup>
 </select>
 <br>
-<label for="graphs">Choose graph 2:</label>
-<select name="graphs" id="graphs" required>
+<label for="graphs2">Choose graph 2:</label>
+<select name="graphs2" id="graphs2" required>
    <optgroup label="Group_1">
     <option id="Tag_0" value="Tag_0" >---</option>
     <option id="Tag_1" value="Tag_1" onclick="drop_options(value)">Tag_1</option>
@@ -152,8 +152,8 @@
   </optgroup>
 </select>
 <br>
-<label for="graphs">Choose graph 3:</label>
-<select name="graphs" id="graphs" required>
+<label for="graphs3">Choose graph 3:</label>
+<select name="graphs3" id="graphs3" required>
    <optgroup label="Group_1">
     <option id="Tag_0" value="Tag_0" >---</option>
     <option id="Tag_1" value="Tag_1" onclick="drop_options(value)">Tag_1</option>
@@ -182,7 +182,7 @@
         <!-- DateTime From...To	 -->
         <form>
           <label for="start_date"> Start date:</label>
-          <input type="date" id="start_date" name="start_date" value="2022-03-16" min="2021-01-01" max="2025-12-01">
+          <input type="date" id="start_date" name="start_date" value="2022-07-23" min="2021-01-01" max="2025-12-01">
         <!-- </td><td> -->
           <label for="start_time"> Start time:</label>
           <input type="time" id="start_time" name="start_time" step="2" value="10:00:00" min="00:00:00" max="23:59:59">
@@ -190,7 +190,7 @@
           <tr>
             <td>
           <label for="end_date"> End date:   </label>
-          <input type="date" id="end_date" name="end_date" value="2022-06-25" min="2022-01-01" max="2025-12-01">
+          <input type="date" id="end_date" name="end_date" value="2022-07-25" min="2022-01-01" max="2025-12-01">
           <!-- </td><td> -->
           <label for="end_time"> End time:   </label>
           <input type="time" id="end_time" name="end_time" step="2" value="10:00:00" min="00:00:00" max="23:59:59">
@@ -199,8 +199,7 @@
         </table>
 
       </td>
-      <td>
-
+      <td style="width: 3px;"><button>Update</button> <!-- <button type="button" onclick="ConnectToDB()">Connect to DB</button> --> <!-- <button type="button" onclick="UpdateChart()">Update</button> -->
       </td>
     </tr>
     </tbody></table>

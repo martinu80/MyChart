@@ -3,44 +3,32 @@
 
 const data = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [{
-    data: [0, 0],
-    label: 'Tag_Name1',
-    fill: false,
-    borderColor: 'rgb(0, 255, 90)',
-    backgroundColor: 'rgb(0, 255, 90)',
-    showLine: true // overrides the `line` dataset default
-  }, 
-   {
-      data: [0, 1],
-      label: 'Tag_Name2',
-      fill: false,
-      borderColor: 'rgb(50, 255, 255)',
-      backgroundColor: 'rgb(50, 255, 255)',
-      showLine: false // overrides the `line` dataset default
-  }]/*, {
-      data: [1, 0],
-      label: 'Tag_Name3',
-      fill: false,
-      borderColor: 'rgb(0, 150, 192)',
-      backgroundColor: 'rgb(0, 150, 192)',
-      showLine: false // overrides the `line` dataset default
-  }, {
-      //type: 'scatter', // 'line' dataset default does not affect this dataset since it's a 'scatter'
-      label: 'Tag_Name',
-      data: [1, 1],
-      fill: false,
-      borderColor: 'rgb(0, 0, 192)',
-      backgroundColor: 'rgb(0, 0, 192)',
-      showLine: false // overrides the `line` dataset default
-    }] */
-  /*   datasets: [{
-      label: 'Tag_Name',
-      data: [0, 0, 0, 0, 0, 0, 0],
-      fill: false,
-      borderColor: 'rgb(75, 192, 192)',
-      backgroundColor: 'rgb(75, 192, 192)',
-    }] */
+    datasets: [
+        {
+            data: [0, 0],
+            label: 'Tag_Name1',
+            fill: false,
+            borderColor: 'rgb(0, 255, 90)',
+            backgroundColor: 'rgb(0, 255, 90)',
+            showLine: false // overrides the `line` dataset default
+        }, 
+        {
+            data: [0, 1],
+            label: 'Tag_Name2',
+            fill: false,
+            borderColor: 'rgb(50, 255, 255)',
+            backgroundColor: 'rgb(50, 255, 255)',
+            showLine: false // overrides the `line` dataset default
+        }, 
+        {
+            data: [1, 0],
+            label: 'Tag_Name3',
+            fill: false,
+            borderColor: 'rgb(0, 150, 192)',
+            backgroundColor: 'rgb(0, 150, 192)',
+            showLine: false // overrides the `line` dataset default
+        }
+    ]
   };
 
   const config = {
@@ -77,18 +65,23 @@ async function generate(){
 }
 
 async function sendParametersToServer(){
-const TagName = document.getElementById("graphs")[document.getElementById("graphs").selectedIndex].text
-    const TagName1 = document.getElementsByClassName("tablinks").value
+    const TagName1 = document.getElementById("graphs1")[document.getElementById("graphs1").selectedIndex].text
+    const TagName2 = document.getElementById("graphs2")[document.getElementById("graphs2").selectedIndex].text
+    const TagName3 = document.getElementById("graphs3")[document.getElementById("graphs3").selectedIndex].text 
+
     const StartDate = document.getElementById("start_date").value
     const EndDate = document.getElementById("end_date").value
     const StartTime = document.getElementById("start_time").value
     const EndTime = document.getElementById("end_time").value
-    console.log(TagName);
     console.log(TagName1);
+    console.log(TagName2);
+    console.log(TagName3);
     console.log(StartDate);
     console.log(EndDate);
     const response = await axios.post("http://localhost:5000/post-eric",{
-        "TagName":TagName,
+        "TagName1":TagName1,
+        "TagName2":TagName2,
+        "TagName3":TagName3,
         //"function":20
         "StartDate" : StartDate,
         "EndDate" : EndDate,
@@ -103,8 +96,8 @@ const TagName = document.getElementById("graphs")[document.getElementById("graph
     //console.log(dataFromServer.datasets[0].data)
     data.labels=[...dataFromServer.labels]
     data.datasets[0].data=[...dataFromServer.datasets[0].data]
-    //data.datasets[1].data=[...dataFromServer.datasets[1].data]
-    //data.datasets[2].data=[...dataFromServer.datasets[2].data]
+    data.datasets[1].data=[...dataFromServer.datasets[1].data]
+    data.datasets[2].data=[...dataFromServer.datasets[2].data]
     myChart.update()
     //alert(response.data.TagName)    
     
