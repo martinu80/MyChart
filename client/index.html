@@ -43,48 +43,83 @@
     <button class="tablinks" onclick="openTab(event, 'Graph 3'), Group_datapoints('G3')">Graph 3</button>
   </div> -->
   <div class="tab">
-    <button name="Tag_1a" id="Tag_1a" class="tablinks" onclick="openTab(event, 'Graph 1'), sendParametersToServer()">Tag_1</button>
-    <button name="Tag_2a" id="Tag_2a" class="tablinks" onclick="openTab(event, 'Graph 2'), sendParametersToServer()">Tag_2</button>
-    <button name="Tag_3a" id="Tag_3a" class="tablinks" onclick="openTab(event, 'Graph 3'), sendParametersToServer()">Tag_3</button>
+    <button name="Tag_1a" id="Tag_1a" class="tablinks" onclick="openTab(event, 'Graph 1'), Group_datapoints('Tag_1'), sendParametersToServer(), Min(0),Max(0),AVG(0)">Tag_1</button>
+    <button name="Tag_2a" id="Tag_2a" class="tablinks" onclick="openTab(event, 'Graph 2'), Group_datapoints('Tag_2'), sendParametersToServer(), Min(1),Max(1),AVG(1)">Tag_2</button>
+    <button name="Tag_3a" id="Tag_3a" class="tablinks" onclick="openTab(event, 'Graph 3'), Group_datapoints('Tag_3'), sendParametersToServer(), Min(2),Max(2),AVG(2)">Tag_3</button>
   </div>
+   <!-- ======================================================================= -->
+
   <!-- Tab content -->
   <div id="Graph 1" class="tabcontent" >
     <h3>Graph 1</h3>
     <p >Flow</p>
-  </div>
+  <!-- </Div> -->
+  </div>       
+       <!-- <script> 
+      </script> -->
+      <script type=text/javascript src="./function.js"></script>
+
+
+ <!-- ======================================================================= -->
 
   <div id="Graph 2" class="tabcontent" >
     <h3>Graph 2</h3>
     <p>Pressure</p>
-  </div>
-
+  <!-- </Div> -->
+  </div>         
+        <!-- <script> 
+        </script> -->
+        <script type=text/javascript src="./function.js"></script>
+  
+    
+   <!-- ======================================================================= -->
+  
   <div id="Graph 3" class="tabcontent" >
     <h3>Graph 3</h3>
     <p>Temperature</p>
-  </div>
 
-  <script type=text/javascript src="./function.js"></script>
+  <!-- </Div> -->
+  </div>    
+        <!-- <script> 
+        </script> -->
+        <script type=text/javascript src="./function.js"></script>
+  
+    
+<!-- ======================================================================= -->
+      <!-- Average-Minimum-Maximum  -->
+         <!-- <Div> -->
+          <div>
+          <table class="tabcontent1">
+            <tbody>
+              <tr>
+                <td style="width:15%; font-size:16px; text-align:left;">
+                  <p>AVG Value</p>
+                  <h2 class="tabcontent1" id="Avg_Value_0">###</h2>
+                </td>
+                <td style="width:15%; font-size:16px; text-align:left;">
+                  <p>MIN Value</p>
+                  <h2 class="tabcontent1" class="tabcontent1" id="Min_Value_0">###</h2>
+                </td>
+                <td style="width:15%; font-size:16px; text-align:left;">
+                  <p>MAX Value</p>
+                  <h2 class="tabcontent1" id="Max_Value_0">###</h2>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+       <!-- </Div> -->
+  </div>       
+       <!-- <script> 
+      </script> -->
+      <script type=text/javascript src="./function.js"></script>
+
+
+ 
 
 <!-- ======================================================================= -->
 
-  <!-- ======================================================================= -->
+ 
 
- <!-- Buttons	 -->
-  <div class="code-editor" data-v-66ca8197 data-v-365c20ab>
-    <div class="code-editor-header" data-v-66ca8197>
-    <div class="code-editor-tabs" data-v-66ca8197>
-        <button class="code-editor-tab" data-v-66ca8197 onclick="AVG()">
-          AVG
-        </button><button class="code-editor-tab" data-v-66ca8197 onclick="Min2Server()">
-          MIN
-        </button><button class="code-editor-tab" data-v-66ca8197 onclick="Max2Server()">
-          MAX
-        </button></div>
-        <h1 id="Value_1">###</h1>
-       </div> </div>
-<!-- <script>
-</script> -->
-<script type=text/javascript src="./function.js"></script>
  
 <!-- ======================================================================= -->
 
@@ -93,6 +128,8 @@
     <tbody>
       <tr>
         <td style="width:25%; font-size:16px; text-align:left;">
+          <button onclick="sendParametersToServer()">Update</button>
+
          <!-- <p>Please choose a function in a drop-down list:</p> -->
           <!-- Datalist to choose a Function -->
         
@@ -113,8 +150,9 @@
          
         </form>  --> 
         </td>
+<!-- ======================================================================= -->
 
-        <td style="width:25%; font-size:16px; text-align:left;">
+      <td style="width:25%; font-size:16px; text-align:left;">
                   <!-- Datalist to choose a trend -->
 <p>Please choose a Tag in a drop-down list:</p>
 
@@ -122,7 +160,7 @@
 <label for="graphs1">Choose graph 1:</label>
 <select name="graphs1" id="graphs1" required>
    <optgroup label="Temperature">
-    <option id="Tag_0" value="Tag_0" >---</option>
+    <option id="Tag_0" value="---" onclick="drop_options(value)">---</option>
     <option id="Tag_1" value="Tag_1" onclick="drop_options(value)">Tag_1</option>
     <option id="Tag_2" value="Tag_2" onclick="drop_options(value)" >Tag_2</option>
     <option id="Tag_3" value="Tag_3" onclick="drop_options(value)">Tag_3</option>
@@ -141,7 +179,7 @@
 <label for="graphs2">Choose graph 2:</label>
 <select name="graphs2" id="graphs2" required>
    <optgroup label="Group_1">
-    <option id="Tag_0" value="Tag_0" >---</option>
+    <option id="Tag_0" value="---" onclick="drop_options(value)">---</option>
     <option id="Tag_1" value="Tag_1" onclick="drop_options(value)">Tag_1</option>
     <option id="Tag_2" value="Tag_2" onclick="drop_options(value)" >Tag_2</option>
     <option id="Tag_3" value="Tag_3" onclick="drop_options(value)">Tag_3</option>
@@ -155,7 +193,7 @@
 <label for="graphs3">Choose graph 3:</label>
 <select name="graphs3" id="graphs3" required>
    <optgroup label="Group_1">
-    <option id="Tag_0" value="Tag_0" >---</option>
+    <option id="Tag_0" value="---"   onclick="drop_options(value)">---</option>
     <option id="Tag_1" value="Tag_1" onclick="drop_options(value)">Tag_1</option>
     <option id="Tag_2" value="Tag_2" onclick="drop_options(value)" >Tag_2</option>
     <option id="Tag_3" value="Tag_3" onclick="drop_options(value)">Tag_3</option>
@@ -165,14 +203,13 @@
     <option value="Tag_4">Tag_4</option>
   </optgroup>
 </select>
-
-<!--<input type="submit" value="Submit" onclick="sendParametersToServer()">-->
-
 <!-- <script>
 </script> -->
 <script type=text/javascript src="./function.js"></script>
 </form>
-        </td>
+      </td>
+
+<!-- ======================================================================= -->
  
       <td style="width:50%; font-size:16px; text-align:left;">
         <p>Please choose the dates:</p>
@@ -199,8 +236,7 @@
         </table>
 
       </td>
-      <td style="width: 3px;"><button>Update</button> <!-- <button type="button" onclick="ConnectToDB()">Connect to DB</button> --> <!-- <button type="button" onclick="UpdateChart()">Update</button> -->
-      </td>
+           </td>
     </tr>
     </tbody></table>
    
@@ -208,24 +244,12 @@
 
   
 <!-- ==========================================================================-->
-
-    <!-- Filter DateTime From...To	 ...Add...Update... buttons-->
-    <!-- <button onclick="filterDate()">Filter</button> -->
- <!--    <button onclick="resetDate()">Reset</button>
-    <br>
-    <input type="pushValue" id="pushValue" value='111'>
-    <button id="push" onclick="UpdateChart()">Update Data</button>
-    <button id="add" onclick="addData(myChart, 'today', dataFromServer)">Add Data</button>
-    <button id="push" onclick="pushValueChart()">Push Data</button>
-    <button id="push" onclick="updateConfigByMutating(myChart)">Update Name</button>
- -->  
-    <!-- <script type=text/javascript src="./function.js"></script> -->
- 
     <br>
     <br>
-    <!-- ==========================================================================-->
+    </div> 
+<!-- ==========================================================================-->
     <!--Filter dates  From...To	 script -->
-    </div>
+   
     
     <!-- <script type="module" src="main.js"></script>
     <script src="/socket.io/socket.io.js"></script>
@@ -244,23 +268,37 @@
     <!-- Chart	 -->
 
      <div class="main">
-        <canvas id="myChart" width="400" height="100"></canvas>
+        <canvas id="myChart" width="400" height="150"></canvas>
     </div>
 <!-- ======================================================================= -->
   <footer>
-
+      <div>
         <button onclick="sendParametersToServer()">Update</button>
         <!-- <button type="button" onclick="ConnectToDB()">Connect to DB</button> -->
         <!-- <button type="button" onclick="UpdateChart()">Update</button> -->
         <button type="button" class="button" onclick="generate()"></button>
-      </div>
+      
     <script type=text/javascript src="./main.js"></script>
-   
+  <!-- ======================================================================= -->
+ 
     <button onclick="AddData()">AddData</button>
     <button onclick="RemoveData()">RemoveData</button>
  
-    <script type=text/javascript src="./function.js"></script>
-  
+    <script type=text/javascript src="./main.js"></script>
+  <!-- ======================================================================= -->
+
+    <button class="code-editor-tab" data-v-66ca8197 onclick="AVG(0)">
+      AVG
+    </button><button class="code-editor-tab" data-v-66ca8197 onclick="Min(0)">
+      MIN
+    </button><button class="code-editor-tab" data-v-66ca8197 onclick="Max(0)">
+      MAX
+    </button></div>
   </footer>
+  <!-- <script>
+  </script> -->
+  <script type=text/javascript src="./function.js"></script>
+  <!-- ======================================================================= -->
+
 </body>
 </html>

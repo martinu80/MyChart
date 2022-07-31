@@ -46,7 +46,29 @@ body {font-family: Arial;}
   border-top: none;
 }
 
+/* Style the tab table content */
+.tabcontent1 {
+  display: yes;
+  padding: 6px 12px;
+  border-color: solid rgb(0, 255, 90);
+  border-top: yes;
+}
+ h2.tabcontent1 {
+  color:  rgb(0, 255, 90);
+}
+ h2.tabcontent2 {
+  color:  rgb(255, 50, 115);
+}
+h2.tabcontent3 {
+  color:  rgb(0, 150, 192);
+}
+ /* td:hover {
+  background-color: rgb(159, 164, 172);
+} */
 
+table, th, td {
+  border: 0px solid;
+}
 /* :root {
     --color_0: 255,255,255;
     --color_1: 0,0,0;
@@ -96,4 +118,4 @@ body {font-family: Arial;}
     --font_9: normal normal normal 15px/1.875em avenir-lt-w01_35-light1475496,avenir-lt-w05_35-light,sans-serif;
     --font_10: normal normal normal 14px/1.79em avenir-lt-w01_35-light1475496,avenir-lt-w05_35-light,sans-serif;
 
-} */f
+} */

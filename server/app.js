@@ -119,7 +119,6 @@ app.post("/post-data", (req, res) => {
 
 app.post("/post-eric", (req, res) => {
   const dataFromClient = req.body;
-  // await request to db 
   const TagName1 = dataFromClient.TagName1
   const TagName2 = dataFromClient.TagName2
   const TagName3 = dataFromClient.TagName3
@@ -131,18 +130,9 @@ app.post("/post-eric", (req, res) => {
   const TagTimeStampStart =  StartDate + ' ' + StartTime
   const TagTimeStampEnd =  EndDate + ' ' + EndTime
   const WhereCondition='WHERE TagTimeStamp BETWEEN ' +  '\''  +  TagTimeStampStart +  '\'' + ' and ' + '\'' + TagTimeStampEnd +  '\''
-/*   console.log(TagName1)
-  console.log(TagName2)
-  console.log(TagName3)*/
+
   console.log(TagNames)
-/*  console.log(StartDate)
-  console.log(StartTime)
-  console.log(EndDate)
-  console.log(EndTime)
-  console.log(TagTimeStampStart)
-  console.log(TagTimeStampEnd) */
- 
- 
+
   //====================================
   // connect to your database
   sql.connect(config, function (err) {
@@ -161,24 +151,9 @@ app.post("/post-eric", (req, res) => {
 
         // send records as a response
         var jsonObj = JSON.parse(JSON.stringify(recordset));
-        
-        countRows = recordset.recordset[0].COUNT_ROWS
-        console.log(countRows)
-        //if(){}
-        for(i=0;i<200;i++){
-          data.labels[i]=jsonObj.recordset[i].TagTimeStamp
-          if(TagName1 != "---"){
-            data.datasets[0].data[i]=jsonObj.recordset[i].Tag_1
-          //console.log(data.datasets[0].data[i])
-          }
-          if(TagName2 != "---"){
-            data.datasets[1].data[i]=jsonObj.recordset[i].Tag_2
-          }
-          if(TagName3 != "---"){
-            data.datasets[2].data[i]=jsonObj.recordset[i].Tag_3
-          }
-      }
-       
+                
+        FillSQLData(TagName1,TagName2,TagName3,jsonObj)
+
         // console.log(jsonObj.recordset[2].TagTimeStamp);
          //console.log(jsonObj);
          //res.json(jsonObj)
@@ -195,6 +170,34 @@ app.post("/post-eric", (req, res) => {
 });
 
 //=====================================================================================
+function FillSQLData(TagName1,TagName2,TagName3,jsonObj){
+  let countRows = jsonObj.recordset[0].COUNT_ROWS
+  let step = Math.floor(countRows/200);
+  console.log(step)
+  for(let i=0;i<countRows;i+=step){
+    data.labels[i]=jsonObj.recordset[i].TagTimeStamp
+    if(TagName1 != "---"){
+      data.datasets[0].data[i]=jsonObj.recordset[i].Tag_1
+    //console.log(data.datasets[0].data[i])
+    }
+    if(TagName2 != "---"){
+      data.datasets[1].data[i]=jsonObj.recordset[i].Tag_2
+    }
+    if(TagName3 != "---"){
+      data.datasets[2].data[i]=jsonObj.recordset[i].Tag_3
+    }
+ } 
+ if(TagName1 == "---"){
+  data.datasets[0].data.length=0;
+ }
+ if(TagName2 == "---"){
+  data.datasets[1].data.length=0;
+ }
+ if(TagName3 == "---"){
+  data.datasets[2].data.length=0;
+ }
+}
+//=====================================================================================
 
 function buildTagNames(){
   let TagNames = ""
@@ -208,4 +211,6 @@ function buildTagNames(){
     }
   }
   return TagNames
-}
+};
+//=====================================================================================
+

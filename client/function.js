@@ -37,13 +37,7 @@ function addData(myChart, label, data) {
     myChart.update();
 }
 
-function removeData(chart) {
-  myChart.data.labels.pop();
-  myChart.data.datasets.forEach((dataset) => {
-        dataset.data.pop();
-    });
-    myChart.update();
-}
+
 
 function updateConfigByMutating(chart) {
     chart.options.plugins.title.text = 'new title';
@@ -149,9 +143,10 @@ function checkTime(i) {
 function drop_options(value){
   Console.log(document.getElementById(graphs).value);
 }
+//=============================================================================================
 
-function Min(){
-  var nums = dataFromServer;
+function Min(j){
+  var nums = data.datasets[j].data;
   let arrayList = nums;
   let min = arrayList[0];
   for (let i = 1; i < arrayList.length; ++i) {
@@ -159,8 +154,51 @@ function Min(){
       min = arrayList[i];
     }
   } 
-document.getElementById("Value_1").innerHTML = (min);
+  console.log(min);
+ //document.getElementById("Min_Value").innerHTML = min;
+  document.getElementById('Min_Value_' + j).innerHTML = min;
 }
+//=============================================================================================
+function Max(j){
+  var nums = data.datasets[j].data;
+  let arrayList = nums;
+  let max = arrayList[0];
+  for (let i = 1; i < arrayList.length; ++i) {
+    if (arrayList[i] > max) {
+      max = arrayList[i];
+    }
+  }
+  console.log(max);
+ document.getElementById('Max_Value_' + j).innerHTML = max;
+}
+//=============================================================================================
+function AVG(j){
+    var nums = data.datasets[j].data;
+//   //An array of numbers that we want to get the average of.
+
+//Work out the sum of the numbers in our array
+// var totalSum = 0;
+// for(var i in nums) {
+//   totalSum += nums[i];
+// }
+// //Work out how many numbers are in our array.
+// var numsCnt = nums.length;
+//
+// //Finally, get the average.
+// var average = totalSum / numsCnt;
+let totalSum = 0;
+let average = 0;
+
+for(const num of nums) {
+  totalSum += num;
+  average = totalSum/nums.length;
+}
+console.log(average);
+//Print the average .
+document.getElementById('Avg_Value_' + j).innerHTML = (average);
+
+}
+
 //=============================================================================================================
 async function Min2Server(){
   let TagTimeStamp=new Date(document.getElementById('start_date').value)+" "+document.getElementById('from-time').value
@@ -212,45 +250,6 @@ async function Max2Server(){
 response.data.status === true //? alert("success") : alert("fail")
 }
 
-//=============================================================================================
-function Max(){
-  var nums = dataFromServer;
-  let arrayList = nums;
-  let max = arrayList[0];
-  for (let i = 1; i < arrayList.length; ++i) {
-    if (arrayList[i] > max) {
-      max = arrayList[i];
-    }
-  }
-//  console.log(max);
-document.getElementById("Value_1").innerHTML = (max);
-}
-
-function AVG2Server(){
-//   //An array of numbers that we want to get the average of.
- var nums = dataFromServer;//[0, 150, 30, 20, -8, -200];
-//
-// //Work out the sum of the numbers in our array
-// var totalSum = 0;
-// for(var i in nums) {
-//   totalSum += nums[i];
-// }
-// //Work out how many numbers are in our array.
-// var numsCnt = nums.length;
-//
-// //Finally, get the average.
-// var average = totalSum / numsCnt;
-let totalSum = 0;
-let average = 0;
-
-for(const num of nums) {
-  totalSum += num;
-  average = totalSum/nums.length;
-}
-console.log(average);
-//Print the average .
-document.getElementById("Value_1").innerHTML = (average);
-}
 
 //============================================================================
 
@@ -266,38 +265,40 @@ for (i = 0; i < tablinks.length; i++) {
 }
 document.getElementById(TabName).style.display = "block";
 document.getElementById(TabName).text = TabName;
-
 evt.currentTarget.className += " active";
 }
 
 //==============================================================================
 function Group_datapoints(Group){
     console.log(Group);
-if (Group="G1") {
-  datapoints=dataFromServer;
-  labels=['a1','a2','a3','a4','a5','a6','G1'];  //console.log(Group);
-    console.log(data[0]);
-    console.log(datapoints);
-    console.log(labels);
-    
-    myChart.update();
-}
-if (Group='G2'){
-datapoints=[27, 286, 255, 234, 211, 267, 287];
-labels=['b1','b2','b3','b4','b5','b6','G2'];
-console.log(datapoints);
-console.log(labels);
-console.log(data[0]);
-//console.log(myChart.data.datasets[0].data);
-//console.log(myChart.data.datasets[0].data.push(pushValue.value));
-myChart.update();
-}
-if (Group='G3'){
-datapoints=[41, 26, 35, 123, 61, 156, 133];
-labels=['d1','d2','d3','d4','d5','d6','G3'];
-console.log(datapoints);
-myChart.update();
-}
+    document.getElementById("graphs1")[document.getElementById("graphs1").selectedIndex].text=Group;
+
+// if (Group="Tag_1") {
+//   // datapoints=dataFromServer;
+//   // labels=['a1','a2','a3','a4','a5','a6','G1'];  //console.log(Group);
+//   //   console.log(data[0]);
+//   //   console.log(datapoints);
+//   //   console.log(labels);
+//      myChart.update();
+// }
+// if (Group='Tag_2'){
+// // datapoints=[27, 286, 255, 234, 211, 267, 287];
+// // labels=['b1','b2','b3','b4','b5','b6','G2'];
+// // console.log(datapoints);
+// // console.log(labels);
+// // console.log(data[0]);
+// //console.log(myChart.data.datasets[0].data);
+// //console.log(myChart.data.datasets[0].data.push(pushValue.value));
+
+// myChart.update();
+// }
+// if (Group='Tag_3'){
+// // datapoints=[41, 26, 35, 123, 61, 156, 133];
+// // labels=['d1','d2','d3','d4','d5','d6','G3'];
+// console.log(datapoints);
+// document.getElementById("graphs3")[document.getElementById("graphs3").selectedIndex].text=Group;
+// myChart.update();
+// }
 }
 
 
